@@ -4,7 +4,8 @@ cp ../firecracker/build/cargo_target/x86_64-unknown-linux-musl/debug/examples/uf
 cp ../firecracker/build/cargo_target/x86_64-unknown-linux-musl/debug/examples/uffd_valid_count_handler bin/.
 
 
-bash ../firecracker/resources/rebuild.sh
+./../firecracker/tools/devtool build_ci_artifacts rootfs
+./../firecracker/tools/devtool build_ci_artifacts kernels 6.1
 cp ../firecracker/resources/x86_64/* ubuntu/.
 
 
