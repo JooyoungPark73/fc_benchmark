@@ -47,16 +47,16 @@ func RunReap(language string, experiment string, loop int) {
 				break // Exit the loop on success
 			}
 
-			logger.Infof("Error invoking server: %v\n", err)
-			logger.Infof("Retrying ...")
+			logger.Debugf("Error invoking server: %v\n", err)
+			logger.Debugf("Retrying ...")
 		}
 		logger.Infof("Response returned")
 		memoryPage = append(memoryPage, strconv.Itoa(profiler.GetCurrentMemoryPage()))
 		logger.Infof("Req memory page: %s\n", memoryPage[0])
 
-		profiler.GracefullyStopFCVM()
-
 		// Write results to CSV
 		writer.Write(memoryPage)
+
+		profiler.GracefullyStopFCVM()
 	}
 }

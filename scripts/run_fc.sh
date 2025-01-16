@@ -45,7 +45,7 @@ curl -X PUT --unix-socket "${API_SOCKET}" \
 # Set machine configuration
 curl -X PUT --unix-socket "${API_SOCKET}" \
     --data "{
-        \"vcpu_count\": 2,
+        \"vcpu_count\": 1,
         \"mem_size_mib\": 1024,
         \"track_dirty_pages\": true
     }" \

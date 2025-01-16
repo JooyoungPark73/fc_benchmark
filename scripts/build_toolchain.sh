@@ -1,7 +1,7 @@
-./../firecracker/tools/devtool build
-cp ../firecracker/build/cargo_target/x86_64-unknown-linux-musl/debug/firecracker bin/.
-cp ../firecracker/build/cargo_target/x86_64-unknown-linux-musl/debug/examples/uffd_valid_count_periodic_handler bin/.
-cp ../firecracker/build/cargo_target/x86_64-unknown-linux-musl/debug/examples/uffd_valid_count_handler bin/.
+./../firecracker/tools/devtool build --release
+cp ../firecracker/build/cargo_target/x86_64-unknown-linux-musl/release/firecracker bin/.
+cp ../firecracker/build/cargo_target/x86_64-unknown-linux-musl/release/examples/uffd_valid_count_periodic_handler bin/.
+cp ../firecracker/build/cargo_target/x86_64-unknown-linux-musl/release/examples/uffd_valid_count_handler bin/.
 
 
 ./../firecracker/tools/devtool build_ci_artifacts rootfs

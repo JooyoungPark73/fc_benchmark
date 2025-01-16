@@ -1,5 +1,4 @@
 from concurrent import futures
-import os
 
 import argparse
 import grpc
@@ -12,15 +11,15 @@ from neta import S3Neta
 class Greeter(helloworld_pb2_grpc.GreeterServicer):
     def SayHello(self, request, context):
         neta = S3Neta(2, 52)
-        buf = neta.get_object("jyp-benchmark", "img_small.jpg")
+        buf = neta.get_object("nexus-benchmark-payload", "input_payload/auth/auth_input.txt")
         print(f"{len(buf)} bytes received")
         
-        temp = neta.put_object("jyp-benchmark", "temp_img_small.jpg", buf)
+        temp = neta.put_object("nexus-benchmark-payload", "output_payload/auth/auth_output.txt", buf)
         print(f"Operation result: {temp}")
         
-        msg = f"fn: ImageRotate | image: img_small.jpg | return msg: temp_img_small.jpg | runtime: Python"
+        msg = f"fn: Example | input: auth_input.txt | return msg: auth_output.txt | runtime: Python"
         return helloworld_pb2.HelloReply(message=msg)
-
+    
 
 def serve(addr, port):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))

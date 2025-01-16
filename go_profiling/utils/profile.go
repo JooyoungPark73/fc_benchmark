@@ -34,7 +34,10 @@ func NewMemoryProfiler(language, experiment, serverCommand, clientCommand string
 			clientCommand = fmt.Sprintf("%s/client", clientPath)
 		case "node":
 			serverCommand = fmt.Sprintf("node %s/server.js", serverPath)
-			clientCommand = fmt.Sprintf("node %s/client.js", clientPath)
+			clientCommand = fmt.Sprintf("python3 %s/client.py", clientPath)
+		case "go":
+			serverCommand = fmt.Sprintf("%s/server", serverPath)
+			clientCommand = fmt.Sprintf("python3 %s/client.py", clientPath)
 		default:
 			return nil, fmt.Errorf("unsupported language")
 		}
@@ -87,7 +90,7 @@ func (m *MemoryProfiler) WarmupServer(loop int) {
 			log.Debugf("Server response during warmup: %s\n", output)
 			successCount++
 		}
-		time.Sleep(5 * time.Second)
+		time.Sleep(1 * time.Second)
 	}
 }
 
@@ -120,6 +123,12 @@ func (m *MemoryProfiler) LoadSnapshot() {
 	log.Infof("Loading snapshot")
 	m.FCClient.StartFCVMM()
 	time.Sleep(3 * time.Second)
+	m.FCClient.RestoreVM()
+}
+
+func (m *MemoryProfiler) LoadSnapshotNoUffd() {
+	log.Infof("Loading snapshot")
+	m.FCClient.StartFCVMM()
 	m.FCClient.RestoreVM()
 }
 
